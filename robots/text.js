@@ -1,13 +1,14 @@
 const algorithmia = require('algorithmia');
 const algorithmiaApiKey = require('../credentials/algorithmia.json').apiKey;
+const sentenceBoundaryDetection = require('sbd');
 
 async function robot(schoolworkContent){
     await fetchWikipediaContent(schoolworkContent);
     sanitizeContentInLines(schoolworkContent);
     breakContentInSubjets(schoolworkContent);
-    // breakContentIntoSentences(schoolworkContent);
+    breakContentIntoSentences(schoolworkContent);
 
-    console.log(schoolworkContent.source.subjects);
+    // console.log(schoolworkContent.source.subjects);
 }
 
 async function fetchWikipediaContent(schoolworkContent){
@@ -74,6 +75,22 @@ function breakContentInSubjets(schoolworkContent){
         else{
             atualContent += `${item} `;
         }
+    });
+}
+
+function breakContentIntoSentences(schoolworkContent){
+    schoolworkContent.source.subjects.forEach((item, index) => {
+        const sentences = sentenceBoundaryDetection.sentences(item.contentOriginal);
+
+        schoolworkContent.source.subjects[index].sentences = [];
+
+        sentences.forEach((sentence) => {
+            schoolworkContent.source.subjects[index].sentences.push({
+                text: sentence,
+                keywords: [],
+                images: []
+            });
+        });
     });
 }
 
