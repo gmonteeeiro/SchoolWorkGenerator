@@ -1,0 +1,23 @@
+{
+  "name": "schoolworkgenerator",
+  "version": "1.0.0",
+  "description": "Gerador de trabalhos prontos",
+  "main": "index.js",
+  "dependencies": {
+    "readline-sync": "^1.4.9"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gmonteeeiro/SchoolWorkGenerator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gmonteeeiro/SchoolWorkGenerator/issues"
+  },
+  "homepage": "https://github.com/gmonteeeiro/SchoolWorkGenerator#readme"
+}
