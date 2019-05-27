@@ -11,14 +11,15 @@ schoolworkContent = {
     ],
     source: [
         contentOriginal = "...",
-        contentLinesSanitizeds = [
-            subjects = [
-                subject = "...",
-                sentences = [
-                    text = "...",
-                    keywords = ["..."],
-                    images = ["..."]
-                ]
+        contentLinesSanitizeds = ["..."],
+        preview = "...",
+        subjects = [
+            title = "...",
+            contentOriginal = "...",
+            sentences = [
+                text = "...",
+                keywords = ["..."],
+                images = ["..."]
             ]
         ],
         links = ["..."],
