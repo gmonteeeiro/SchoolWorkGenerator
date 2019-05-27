@@ -3,11 +3,11 @@ const robots = {
     text: require('./robots/text.js')
 }
 
-function start(){
+async function start(){
     const schoolworkContent = {};
     
     robots.userInputs(schoolworkContent);
-    robots.text(schoolworkContent);
+    await robots.text(schoolworkContent);
     
     console.log(schoolworkContent);
 }
