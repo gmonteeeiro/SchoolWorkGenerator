@@ -1,0 +1,26 @@
+```
+schoolworkContent{
+    info: [
+        students: [...],
+        school: [
+            name: "...",
+            teacher: "...",
+            class: "..."
+        ],
+        deliveryDate: "...",
+        searchTerm: "..."
+    ],
+    source:[
+        contentOriginal: "...",
+        contentSanitized: "...",
+        sentences: [
+            text: "...",
+            keywords: ["..."],
+            images: ["..."],
+        ]
+        links: ["..."],
+        references: ["..."],
+        wikipediaSummary: "..."
+    ]
+}
+```

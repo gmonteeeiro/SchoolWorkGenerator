@@ -2,23 +2,28 @@ const algorithmia = require('algorithmia');
 const algorithmiaApiKey = require('../credentials/algorithmia.json').apiKey;
 
 async function robot(schoolworkContent){
-    schoolworkContent.source = [];
-    schoolworkContent.source.contentOriginal = await fetchWikipediaContent(schoolworkContent.info.searchTerm);
+    await fetchWikipediaContent(schoolworkContent);
     // sanitizeContent();
     // breakContentIntoSentences();
 }
 
-async function fetchWikipediaContent(searchTerm){
+async function fetchWikipediaContent(schoolworkContent){
     let wikipediaInput = {
-        "articleName": searchTerm,
+        "articleName": schoolworkContent.info.searchTerm,
         "lang": "pt"
     };
 
     const algorithmiaAuthenticated = algorithmia(algorithmiaApiKey);
     const wikipediaAlgorith = algorithmiaAuthenticated.algo('web/WikipediaParser/0.1.2');
-    const WikipediaResponse = await wikipediaAlgorith.pipe(wikipediaInput);
+    const wikipediaResponse = await wikipediaAlgorith.pipe(wikipediaInput);
+    const wikipediaContent = wikipediaResponse.get();
     
-    return WikipediaResponse.get();
+    schoolworkContent.source = [];
+    schoolworkContent.source.contentOriginal = wikipediaContent.content;
+    schoolworkContent.source.wikipediaSummary = wikipediaContent.summary;
+
+    schoolworkContent.source.references = wikipediaContent.references;
+    schoolworkContent.source.references.push(wikipediaContent.url);
 }
 
 module.exports = robot;

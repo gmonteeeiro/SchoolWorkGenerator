@@ -9,7 +9,7 @@ async function start(){
     robots.userInputs(schoolworkContent);
     await robots.text(schoolworkContent);
     
-    console.log(schoolworkContent);
+    //console.log(schoolworkContent);
 }
 
 start();
