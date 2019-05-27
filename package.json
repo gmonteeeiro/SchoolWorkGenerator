@@ -4,6 +4,7 @@
   "description": "Gerador de trabalhos prontos",
   "main": "index.js",
   "dependencies": {
+    "algorithmia": "^0.3.10",
     "readline-sync": "^1.4.9"
   },
   "devDependencies": {},
