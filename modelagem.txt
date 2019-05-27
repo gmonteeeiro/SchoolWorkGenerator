@@ -1,26 +1,28 @@
-```
-schoolworkContent{
+schoolworkContent = {
     info: [
-        students: [...],
-        school: [
-            name: "...",
-            teacher: "...",
-            class: "..."
+        students = ["..."],
+        school = [
+            name = "...",
+            teacher = "...",
+            descClass = "..."
         ],
-        deliveryDate: "...",
-        searchTerm: "..."
+        deliveryDate = "...",
+        searchTerm = "..."
     ],
-    source:[
-        contentOriginal: "...",
-        contentSanitized: "...",
-        sentences: [
-            text: "...",
-            keywords: ["..."],
-            images: ["..."],
-        ]
-        links: ["..."],
-        references: ["..."],
-        wikipediaSummary: "..."
+    source: [
+        contentOriginal = "...",
+        contentLinesSanitizeds = [
+            subjects = [
+                subject = "...",
+                sentences = [
+                    text = "...",
+                    keywords = ["..."],
+                    images = ["..."]
+                ]
+            ]
+        ],
+        links = ["..."],
+        references = ["..."],
+        wikipediaSummary = "..."
     ]
 }
-```
