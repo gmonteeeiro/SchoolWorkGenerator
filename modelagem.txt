@@ -1,0 +1,29 @@
+schoolworkContent = {
+    info: [
+        students = ["..."],
+        school = [
+            name = "...",
+            teacher = "...",
+            descClass = "..."
+        ],
+        deliveryDate = "...",
+        searchTerm = "..."
+    ],
+    source: [
+        contentOriginal = "...",
+        contentLinesSanitizeds = ["..."],
+        preview = "...",
+        subjects = [
+            title = "...",
+            contentOriginal = "...",
+            sentences = [
+                text = "...",
+                keywords = ["..."],
+                images = ["..."]
+            ]
+        ],
+        links = ["..."],
+        references = ["..."],
+        wikipediaSummary = "..."
+    ]
+}
