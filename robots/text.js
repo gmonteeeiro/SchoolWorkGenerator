@@ -2,19 +2,34 @@ const algorithmia = require('algorithmia');
 const algorithmiaApiKey = require('../credentials/algorithmia.json').apiKey;
 const sentenceBoundaryDetection = require('sbd');
 
+const watsonApiKey = require('../credentials/watson-nlu.json').apikey;
+const watsonApiUrl = require('../credentials/watson-nlu.json').url;
+
+const NaturalLanguageUnderstandingV1 = require('ibm-watson/natural-language-understanding/v1.js');
+
+var nlu = new NaturalLanguageUnderstandingV1({
+    iam_apikey: watsonApiKey,
+    version: '2018-04-05',
+    url: watsonApiUrl
+});
+
 async function robot(schoolworkContent){
     await fetchWikipediaContent(schoolworkContent);
     sanitizeContentInLines(schoolworkContent);
     breakContentInSubjets(schoolworkContent);
     breakContentIntoSentences(schoolworkContent);
 
-    // console.log(schoolworkContent.source.subjects);
+    await getSentencesKeywords(schoolworkContent);
+
+
+
+    console.log(schoolworkContent.source.subjects);
 }
 
 async function fetchWikipediaContent(schoolworkContent){
     let wikipediaInput = {
         "articleName": schoolworkContent.info.searchTerm,
-        "lang": "pt"
+        "lang": "en"
     };
 
     const algorithmiaAuthenticated = algorithmia(algorithmiaApiKey);
@@ -90,6 +105,36 @@ function breakContentIntoSentences(schoolworkContent){
                 keywords: [],
                 images: []
             });
+        });
+    });
+}
+
+async function watsonKeywords(sentence){
+    return new Promise((resolve, reject) => {
+        nlu.analyze({
+            text: sentence,
+            features: {
+                keywords: {}
+            }
+        }, (error, response) => {
+            if (error) {
+                // reject(error);
+                return;
+            }
+
+            const keywords = response.keywords.map(keyword => {
+                return keyword.text
+            });
+  
+            resolve(keywords);
+        });
+    });
+}
+
+async function getSentencesKeywords(schoolworkContent){
+    schoolworkContent.source.subjects.forEach(async(subjectItem, subjectIndex) => {
+        subjectItem.sentences.forEach(async(sentenceItem, sentenceIndex) => {
+            schoolworkContent.source.subjects[subjectIndex].sentences[sentenceIndex].keywords = await watsonKeywords(sentenceItem.text);
         });
     });
 }
